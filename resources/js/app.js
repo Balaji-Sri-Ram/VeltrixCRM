@@ -74,12 +74,81 @@ document.addEventListener('DOMContentLoaded', () => {
         y: 40,
         opacity: 0,
         stagger: 0.15,
-    })
-    .from('.animate-hero-img', {
-        y: 60,
-        opacity: 0,
-    }, '-=0.6')
-    .from('.animate-stats', {
+    });
+
+    // Premium Spread Animation for Hero Cards
+    const heroCards = Array.from(document.querySelectorAll('.hero-card'));
+    if (heroCards.length === 6) {
+        const anchorCard = heroCards[0];
+        
+        // Use a slight delay or RAF to ensure layout is completely settled
+        requestAnimationFrame(() => {
+            const anchorRect = anchorCard.getBoundingClientRect();
+            
+            const cardDeltas = heroCards.map(card => {
+                const rect = card.getBoundingClientRect();
+                return {
+                    dx: anchorRect.left - rect.left,
+                    dy: anchorRect.top - rect.top
+                };
+            });
+
+            heroCards.forEach((card, index) => {
+                tl.fromTo(card,
+                    { x: cardDeltas[index].dx, y: cardDeltas[index].dy, scale: 0.7, opacity: 0 },
+                    { x: 0, y: 0, scale: 1, opacity: 1, duration: 1.4, ease: 'power4.out' },
+                    index === 0 ? '-=0.8' : `-=${1.3}`
+                );
+            });
+
+            // Idle Float Animation
+            tl.add(() => {
+                heroCards.forEach((card, i) => {
+                    gsap.to(card, {
+                        yPercent: -3,
+                        duration: 2.5 + i * 0.2,
+                        ease: "sine.inOut",
+                        yoyo: true,
+                        repeat: -1,
+                        delay: i * 0.15
+                    });
+                });
+            });
+
+            // Scroll-linked Collapse
+            const heroSection = document.querySelector('section.pt-2');
+            const nextSection = document.querySelector('.scroll-section');
+            
+            if (heroSection && nextSection) {
+                const collapseTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: heroSection,
+                        start: 'top top',
+                        endTrigger: nextSection,
+                        end: 'top top',
+                        scrub: 1,
+                    }
+                });
+
+                heroCards.forEach((card, index) => {
+                    collapseTl.to(card, {
+                        x: cardDeltas[index].dx,
+                        y: cardDeltas[index].dy,
+                        scale: 0.7,
+                        opacity: 0,
+                        ease: 'none'
+                    }, 0);
+                });
+            }
+        });
+    } else {
+        tl.from('.animate-hero-img', {
+            y: 60,
+            opacity: 0,
+        }, '-=0.6');
+    }
+
+    tl.from('.animate-stats', {
         y: 30,
         opacity: 0,
     }, '-=0.8');

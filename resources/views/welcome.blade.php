@@ -61,12 +61,11 @@
             border: 1px solid var(--color-border-soft);
             box-shadow: 0 10px 30px -8px rgba(45, 58, 45, 0.08);
             background-color: var(--color-bg-card);
-            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
-            will-change: transform;
+            transition: box-shadow 0.5s ease;
+            will-change: transform, opacity;
         }
 
         .hero-card:hover {
-            transform: translateY(-6px) scale(1.03);
             box-shadow: 0 20px 45px -12px rgba(45, 58, 45, 0.18);
         }
 
@@ -246,28 +245,28 @@
                     <div class="hero-grid-container z-10">
                         <!-- Column 1 (Leftmost) -->
                         <div class="hero-grid-col col-1">
-                            <div class="hero-card">
+                            <div class="hero-card card-1">
                                 <img src="/images/CRM1.jpg" alt="CRM Workspace 1" class="hero-card-img">
                             </div>
                         </div>
                         <!-- Column 2 (Middle) -->
                         <div class="hero-grid-col col-2">
-                            <div class="hero-card">
+                            <div class="hero-card card-2">
                                 <img src="/images/CRM2.jpg" alt="CRM Workspace 2" class="hero-card-img">
                             </div>
-                            <div class="hero-card">
+                            <div class="hero-card card-3">
                                 <img src="/images/CRM3.jpg" alt="CRM Workspace 3" class="hero-card-img">
                             </div>
                         </div>
                         <!-- Column 3 (Rightmost) -->
                         <div class="hero-grid-col col-3">
-                            <div class="hero-card">
+                            <div class="hero-card card-4">
                                 <img src="/images/CRM4.jpg" alt="CRM Workspace 4" class="hero-card-img">
                             </div>
-                            <div class="hero-card">
+                            <div class="hero-card card-5">
                                 <img src="/images/CRM5.jpg" alt="CRM Workspace 5" class="hero-card-img">
                             </div>
-                            <div class="hero-card">
+                            <div class="hero-card card-6">
                                 <img src="/images/CRM6.jpg" alt="CRM Workspace 6" class="hero-card-img">
                             </div>
                         </div>
@@ -281,8 +280,8 @@
         <!-- Trust Section -->
         <section class="scroll-section py-20 border-y border-[var(--color-border-soft)] reveal">
             <div class="container-boxed">
-                <p class="text-center text-[10px] font-bold tracking-[0.3em] text-[var(--color-graphite)] uppercase mb-12 opacity-60">{{ __('messages.trust_heading') }}</p>
-                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-30 grayscale contrast-125">
+                <p class="text-center text-[10px] font-bold tracking-[0.3em] text-[var(--color-graphite)] uppercase mb-12 opacity-80">{{ __('messages.trust_heading') }}</p>
+                <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale contrast-125">
                     <span class="text-2xl font-black tracking-tighter">UMBRA</span>
                     <span class="text-2xl font-black tracking-tighter">NOVA</span>
                     <span class="text-2xl font-black tracking-tighter">KINETIC</span>
