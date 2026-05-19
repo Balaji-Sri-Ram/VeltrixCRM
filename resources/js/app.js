@@ -101,10 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // A. Sticky Pinning (with NO pin spacing so next section slides over it like a stack)
             ScrollTrigger.create({
                 trigger: section,
-                start: 'top top', // strictly pin at top top for perfect coordinate consistency
+                start: 'top top', // strictly pin at top top
                 endTrigger: nextSection,
                 end: isLast ? 'bottom bottom' : 'top top',
-                pin: true,
+                pin: section,
                 pinSpacing: false,
                 anticipatePin: 1, // completely eliminates pinning jumps or jitter
                 invalidateOnRefresh: true,
@@ -179,13 +179,4 @@ document.addEventListener('DOMContentLoaded', () => {
             '-=0.2' // slight overlap for a seamless cross-fade
         );
     }
-
-    // 6. Subtle Float for Landing Page Dashboard Mockup Illustration
-    gsap.to('.floating-img', {
-        y: -15,
-        duration: 2.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut'
-    });
 });

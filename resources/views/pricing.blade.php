@@ -475,6 +475,10 @@
         overlay.classList.remove('hidden');
         overlay.classList.add('flex');
         
+        // Play Success Sound
+        const successSound = new Audio('/PhonePe - Ting Ding.mp3');
+        successSound.play().catch(error => console.warn('Audio playback prevented by browser:', error));
+        
         if (successAnim) successAnim.destroy();
         successAnim = lottie.loadAnimation({
             container: document.getElementById('lottie-success'),

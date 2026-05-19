@@ -13,16 +13,6 @@
         /* Transitions handled by GSAP or CSS when active */
         .reveal { transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
         
-        /* Smooth floating animation */
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        .floating-img {
-            animation: floating 4s ease-in-out infinite;
-        }
-
         /* Success bounce animation */
         @keyframes bounceIn {
             0% { transform: scale(0.3); opacity: 0; }
@@ -32,6 +22,104 @@
         }
         .animate-bounce-in {
             animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        /* Premium Staggered Image Grid styling */
+        .hero-grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            gap: 1.25rem;
+            position: relative;
+            align-items: start;
+        }
+
+        .hero-grid-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Vertical offset stagger */
+        .col-1 {
+            margin-top: 12.5rem;
+        }
+
+        .col-2 {
+            margin-top: 6rem;
+        }
+
+        .col-3 {
+            margin-top: 0;
+        }
+
+        .hero-card {
+            position: relative;
+            width: 130px;
+            height: 195px;
+            border-radius: 2.25rem;
+            overflow: hidden;
+            border: 1px solid var(--color-border-soft);
+            box-shadow: 0 10px 30px -8px rgba(45, 58, 45, 0.08);
+            background-color: var(--color-bg-card);
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+            will-change: transform;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 20px 45px -12px rgba(45, 58, 45, 0.18);
+        }
+
+        .hero-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .hero-card:hover .hero-card-img {
+            transform: scale(1.05);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .hero-grid-container {
+                gap: 1rem;
+            }
+            .hero-grid-col {
+                gap: 1rem;
+            }
+            .col-1 {
+                margin-top: 10rem;
+            }
+            .col-2 {
+                margin-top: 5rem;
+            }
+            .hero-card {
+                width: 110px;
+                height: 165px;
+                border-radius: 1.75rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-grid-container {
+                gap: 0.75rem;
+            }
+            .hero-grid-col {
+                gap: 0.75rem;
+            }
+            .col-1 {
+                margin-top: 8rem;
+            }
+            .col-2 {
+                margin-top: 4rem;
+            }
+            .hero-card {
+                width: 85px;
+                height: 128px;
+                border-radius: 1.25rem;
+            }
         }
     </style>
 </head>
@@ -113,8 +201,7 @@
     </nav>
 
     <main>
-        <!-- Hero Section -->
-        <section class="scroll-section pt-8 pb-24 lg:pt-12 lg:pb-32 overflow-hidden">
+        <section class="pt-2 pb-24 lg:pt-4 lg:pb-32 overflow-hidden">
             <div class="container-boxed grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                 
                 <!-- Left Side: Copy -->
@@ -154,13 +241,39 @@
                     </div>
                 </div>
 
-                <!-- Right Side: Dashboard Mockup -->
-                <div class="relative animate-hero-img">
-                    <div class="relative z-10 overflow-hidden rounded-[32px] border border-[var(--color-border-soft)] shadow-[0_40px_80px_-24px_rgba(45,58,45,0.15)] floating-img">
-                        <img src="/images/hero.png" alt="VeltrixCRM Dashboard Preview" class="w-full object-cover">
+                <!-- Right Side: Staggered Premium CRM Image Grid -->
+                <div class="relative animate-hero-img flex justify-center lg:justify-end items-center pt-2 pb-6">
+                    <div class="hero-grid-container z-10">
+                        <!-- Column 1 (Leftmost) -->
+                        <div class="hero-grid-col col-1">
+                            <div class="hero-card">
+                                <img src="/images/CRM1.jpg" alt="CRM Workspace 1" class="hero-card-img">
+                            </div>
+                        </div>
+                        <!-- Column 2 (Middle) -->
+                        <div class="hero-grid-col col-2">
+                            <div class="hero-card">
+                                <img src="/images/CRM2.jpg" alt="CRM Workspace 2" class="hero-card-img">
+                            </div>
+                            <div class="hero-card">
+                                <img src="/images/CRM3.jpg" alt="CRM Workspace 3" class="hero-card-img">
+                            </div>
+                        </div>
+                        <!-- Column 3 (Rightmost) -->
+                        <div class="hero-grid-col col-3">
+                            <div class="hero-card">
+                                <img src="/images/CRM4.jpg" alt="CRM Workspace 4" class="hero-card-img">
+                            </div>
+                            <div class="hero-card">
+                                <img src="/images/CRM5.jpg" alt="CRM Workspace 5" class="hero-card-img">
+                            </div>
+                            <div class="hero-card">
+                                <img src="/images/CRM6.jpg" alt="CRM Workspace 6" class="hero-card-img">
+                            </div>
+                        </div>
                     </div>
                     <!-- Subtle natural shadow element -->
-                    <div class="absolute -bottom-12 -right-12 -left-12 h-1/2 bg-gradient-to-t from-[var(--color-bg-base)] to-transparent pointer-events-none z-0"></div>
+                    <div class="absolute -bottom-12 -right-12 -left-12 h-1/3 bg-gradient-to-t from-[var(--color-bg-base)] to-transparent pointer-events-none z-0"></div>
                 </div>
             </div>
         </section>
