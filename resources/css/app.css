@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    
+    /* Veltrix Natural Palette */
+    --color-bg-base: #FBFBF9;
+    --color-bg-card: #F5F3EF;
+    --color-primary: #2D3A2D; /* Deep Forest Green */
+    --color-primary-light: #4A5D4E;
+    --color-accent: #9B5A46; /* Muted Terracotta */
+    --color-charcoal: #1A1A1A;
+    --color-graphite: #706F6C;
+    --color-border-soft: #E5E2DC;
+    --color-sidebar: #FFFFFF;
+}
+
+@layer base {
+    body {
+        @apply bg-[var(--color-bg-base)] text-[var(--color-charcoal)] antialiased selection:bg-[var(--color-primary)] selection:text-white;
+    }
+
+    /* Style all select dropdowns across the complete application */
+    select {
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23706F6C' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+        background-position: right 1.25rem center !important;
+        background-repeat: no-repeat !important;
+        background-size: 1.25em 1.25em !important;
+        padding-right: 3.25rem !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    
+    select:focus {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%232D3A2D' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+        border-color: var(--color-primary) !important;
+    }
+}
+
+@layer components {
+    .nav-item-veltrix {
+        @apply flex items-center space-x-3 px-5 py-3.5 rounded-2xl transition-all duration-300 text-[var(--color-graphite)] font-medium hover:bg-[var(--color-bg-card)] hover:text-[var(--color-primary)] hover:translate-x-1;
+    }
+    .nav-item-veltrix.active {
+        @apply bg-[var(--color-primary)] text-white shadow-lg shadow-[var(--color-primary)]/10 hover:translate-x-0;
+    }
+    .container-boxed {
+        @apply max-w-7xl mx-auto px-6 lg:px-12;
+    }
+
+    .btn-premium {
+        @apply px-8 py-3.5 rounded-full font-semibold transition-all duration-300 active:scale-[0.98] inline-flex items-center justify-center;
+    }
+
+    .btn-primary-veltrix {
+        @apply px-8 py-3.5 rounded-full font-semibold transition-all duration-300 active:scale-[0.98] inline-flex items-center justify-center bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-light)] shadow-sm;
+    }
+
+    .btn-secondary-veltrix {
+        @apply px-8 py-3.5 rounded-full font-semibold transition-all duration-300 active:scale-[0.98] inline-flex items-center justify-center bg-white border border-[rgba(26,26,26,0.15)] text-[var(--color-graphite)];
+    }
+    .btn-secondary-veltrix:hover {
+        background-color: rgba(26, 26, 26, 0.02) !important;
+        border-color: var(--color-charcoal) !important;
+        color: #000000 !important;
+    }
+
+    .heading-editorial {
+        @apply font-bold tracking-tight text-[var(--color-charcoal)] leading-[1.15];
+    }
+
+    .text-muted-veltrix {
+        @apply text-[var(--color-graphite)] leading-relaxed;
+    }
+
+    .card-veltrix {
+        @apply bg-[var(--color-bg-card)] rounded-2xl p-8 border border-[var(--color-border-soft)] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] transition-all duration-500;
+    }
+}
+
+/* Custom Utilities */
+.natural-shadow {
+    box-shadow: 0 10px 40px -10px rgba(45, 58, 45, 0.08);
+}
+
+/* Premium Scroll Transitions & Lenis styles */
+html.lenis, html.lenis body {
+    height: auto;
+}
+
+.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+.scroll-section {
+    position: relative;
+}
+
+.scroll-section .container-boxed {
+    will-change: transform, opacity, filter;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+footer {
+    position: relative;
+    z-index: 10;
+    background-color: var(--color-bg-base) !important;
+}
