@@ -64,30 +64,30 @@ class ForgotPasswordTest extends TestCase
     public function test_full_recovery_flow_succeeds_for_valid_user()
     {
         $user = User::factory()->create([
-            'email' => 'ramuparasa02@gmail.com',
+            'email' => 'veltrixcrm@gmail.com',
             'password' => bcrypt('OldPassword@123')
         ]);
 
         // 1. Request OTP
         $response = $this->postJson(route('password.otp.send'), [
-            'email' => 'ramuparasa02@gmail.com'
+            'email' => 'veltrixcrm@gmail.com'
         ]);
         $response->assertOk();
 
-        $tokenRecord = DB::table('password_reset_tokens')->where('email', 'ramuparasa02@gmail.com')->first();
+        $tokenRecord = DB::table('password_reset_tokens')->where('email', 'veltrixcrm@gmail.com')->first();
         $this->assertNotNull($tokenRecord);
         $otp = $tokenRecord->token;
 
         // 2. Verify OTP
         $response = $this->postJson(route('password.otp.verify'), [
-            'email' => 'ramuparasa02@gmail.com',
+            'email' => 'veltrixcrm@gmail.com',
             'otp' => $otp
         ]);
         $response->assertOk();
 
         // 3. Reset Password
         $response = $this->postJson(route('password.reset.update'), [
-            'email' => 'ramuparasa02@gmail.com',
+            'email' => 'veltrixcrm@gmail.com',
             'otp' => $otp,
             'password' => 'NewPassword@123',
             'password_confirmation' => 'NewPassword@123'
@@ -96,12 +96,12 @@ class ForgotPasswordTest extends TestCase
 
         // Verify database state
         $this->assertDatabaseMissing('password_reset_tokens', [
-            'email' => 'ramuparasa02@gmail.com'
+            'email' => 'veltrixcrm@gmail.com'
         ]);
 
         // Try to log in with new password
         $response = $this->post('/login', [
-            'email' => 'ramuparasa02@gmail.com',
+            'email' => 'veltrixcrm@gmail.com',
             'password' => 'NewPassword@123'
         ]);
         $response->assertRedirect();

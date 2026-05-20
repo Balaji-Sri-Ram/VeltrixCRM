@@ -260,7 +260,7 @@
         </div>
         <div class="footer">
             <p>© {{ date('Y') }} VeltrixCRM Technologies. All rights reserved.</p>
-            <p>This is an automated notification from VeltrixCRM. <a href="mailto:ramuparasa02@gmail.com">Contact Support</a></p>
+            <p>This is an automated notification from VeltrixCRM. <a href="mailto:veltrixcrm@gmail.com">Contact Support</a></p>
         </div>
     </div>
 </body>

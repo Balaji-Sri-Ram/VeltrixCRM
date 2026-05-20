@@ -20,10 +20,16 @@
         <div>
             <p class="text-[10px] font-bold text-muted-veltrix uppercase tracking-[0.2em] mb-4">{{ __('messages.total_customers') }}</p>
             <h3 id="stat-totalCustomers" class="heading-editorial text-3xl">{{ $totalCustomers ?? 0 }}</h3>
-            <p class="text-[10px] text-emerald-600 font-bold mt-4 flex items-center bg-emerald-50 px-2 py-1 rounded-lg inline-flex">
-                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                +12.5%
-            </p>
+            <span id="stat-customerGrowthContainer" class="text-[10px] font-bold mt-4 flex items-center px-2 py-1 rounded-lg inline-flex {{ $customerGrowth >= 0 ? 'text-emerald-600 bg-emerald-50' : 'text-[var(--color-accent)] bg-[var(--color-accent)]/5' }}">
+                <svg id="stat-customerGrowthIcon" class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    @if($customerGrowth >= 0)
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    @else
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                    @endif
+                </svg>
+                <span id="stat-customerGrowthValue">{{ $customerGrowth >= 0 ? '+' : '' }}{{ $customerGrowth }}%</span>
+            </span>
         </div>
         <div class="p-3 bg-[var(--color-bg-base)] text-[var(--color-primary)] rounded-2xl border border-[var(--color-border-soft)]">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
@@ -34,7 +40,9 @@
         <div>
             <p class="text-[10px] font-bold text-muted-veltrix uppercase tracking-[0.2em] mb-4">{{ __('messages.active_staff') }}</p>
             <h3 id="stat-totalStaff" class="heading-editorial text-3xl">{{ $totalStaff ?? 0 }}</h3>
-            <p class="text-[10px] text-muted-veltrix font-bold mt-4 px-2 py-1 bg-[var(--color-bg-base)] rounded-lg inline-flex">{{ __('messages.online') }}: 12</p>
+            <p class="text-[10px] text-muted-veltrix font-bold mt-4 px-2 py-1 bg-[var(--color-bg-base)] rounded-lg inline-flex">
+                {{ __('messages.online') }}:&nbsp;<span id="stat-onlineStaff">{{ $onlineStaffCount ?? 0 }}</span>
+            </p>
         </div>
         <div class="p-3 bg-[var(--color-bg-base)] text-[var(--color-accent)] rounded-2xl border border-[var(--color-border-soft)]">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
@@ -45,10 +53,16 @@
         <div>
             <p class="text-[10px] font-bold text-muted-veltrix uppercase tracking-[0.2em] mb-4">{{ __('messages.total_tasks') }}</p>
             <h3 id="stat-totalTasks" class="heading-editorial text-3xl">{{ $totalTasks ?? 0 }}</h3>
-            <p class="text-[10px] text-[var(--color-accent)] font-bold mt-4 flex items-center bg-[var(--color-accent)]/5 px-2 py-1 rounded-lg inline-flex">
-                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
-                -2.4%
-            </p>
+            <span id="stat-taskGrowthContainer" class="text-[10px] font-bold mt-4 flex items-center px-2 py-1 rounded-lg inline-flex {{ $taskGrowth >= 0 ? 'text-emerald-600 bg-emerald-50' : 'text-[var(--color-accent)] bg-[var(--color-accent)]/5' }}">
+                <svg id="stat-taskGrowthIcon" class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    @if($taskGrowth >= 0)
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    @else
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
+                    @endif
+                </svg>
+                <span id="stat-taskGrowthValue">{{ $taskGrowth >= 0 ? '+' : '' }}{{ $taskGrowth }}%</span>
+            </span>
         </div>
         <div class="p-3 bg-[var(--color-bg-base)] text-[var(--color-graphite)] rounded-2xl border border-[var(--color-border-soft)]">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
@@ -60,9 +74,11 @@
             <p class="text-[10px] font-bold text-muted-veltrix uppercase tracking-[0.2em] mb-4">{{ __('messages.completed') }}</p>
             <h3 id="stat-completedTasks" class="heading-editorial text-3xl">{{ $completedTasks ?? 0 }}</h3>
             <div class="w-24 bg-[var(--color-border-soft)] rounded-full h-1 mt-4 relative overflow-hidden">
-                <div class="bg-emerald-600 h-1 rounded-full" style="width: 70%"></div>
+                <div id="stat-taskEfficiencyProgress" class="bg-emerald-600 h-1 rounded-full" style="width: {{ $taskEfficiency }}%"></div>
             </div>
-            <p class="text-[9px] font-bold text-muted-veltrix mt-2 uppercase tracking-widest">70% Efficiency</p>
+            <p class="text-[9px] font-bold text-muted-veltrix mt-2 uppercase tracking-widest">
+                <span id="stat-taskEfficiencyLabel">{{ $taskEfficiency }}%</span> Efficiency
+            </p>
         </div>
         <div class="p-3 bg-[var(--color-bg-base)] text-emerald-600 rounded-2xl border border-[var(--color-border-soft)]">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -344,6 +360,70 @@
                 document.getElementById('stat-totalStaff').textContent = data.totalStaff;
                 document.getElementById('stat-totalTasks').textContent = data.totalTasks;
                 document.getElementById('stat-completedTasks').textContent = data.completedTasks;
+
+                // 1. Update Customer Growth Badge
+                const customerGrowth = parseFloat(data.customerGrowth);
+                const custGrowthContainer = document.getElementById('stat-customerGrowthContainer');
+                const custGrowthValue = document.getElementById('stat-customerGrowthValue');
+                const custGrowthIcon = document.getElementById('stat-customerGrowthIcon');
+                
+                if (custGrowthValue) {
+                    custGrowthValue.textContent = (customerGrowth >= 0 ? '+' : '') + customerGrowth + '%';
+                }
+                if (custGrowthContainer) {
+                    if (customerGrowth >= 0) {
+                        custGrowthContainer.className = 'text-[10px] font-bold mt-4 flex items-center px-2 py-1 rounded-lg inline-flex text-emerald-600 bg-emerald-50';
+                        if (custGrowthIcon) {
+                            custGrowthIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>';
+                        }
+                    } else {
+                        custGrowthContainer.className = 'text-[10px] font-bold mt-4 flex items-center px-2 py-1 rounded-lg inline-flex text-[var(--color-accent)] bg-[var(--color-accent)]/5';
+                        if (custGrowthIcon) {
+                            custGrowthIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>';
+                        }
+                    }
+                }
+
+                // 2. Update Online Staff Count
+                const onlineStaff = document.getElementById('stat-onlineStaff');
+                if (onlineStaff) {
+                    onlineStaff.textContent = data.onlineStaffCount;
+                }
+
+                // 3. Update Task Growth Badge
+                const taskGrowth = parseFloat(data.taskGrowth);
+                const taskGrowthContainer = document.getElementById('stat-taskGrowthContainer');
+                const taskGrowthValue = document.getElementById('stat-taskGrowthValue');
+                const taskGrowthIcon = document.getElementById('stat-taskGrowthIcon');
+                
+                if (taskGrowthValue) {
+                    taskGrowthValue.textContent = (taskGrowth >= 0 ? '+' : '') + taskGrowth + '%';
+                }
+                if (taskGrowthContainer) {
+                    if (taskGrowth >= 0) {
+                        taskGrowthContainer.className = 'text-[10px] font-bold mt-4 flex items-center px-2 py-1 rounded-lg inline-flex text-emerald-600 bg-emerald-50';
+                        if (taskGrowthIcon) {
+                            taskGrowthIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>';
+                        }
+                    } else {
+                        taskGrowthContainer.className = 'text-[10px] font-bold mt-4 flex items-center px-2 py-1 rounded-lg inline-flex text-[var(--color-accent)] bg-[var(--color-accent)]/5';
+                        if (taskGrowthIcon) {
+                            taskGrowthIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>';
+                        }
+                    }
+                }
+
+                // 4. Update Task Completion Efficiency Progress & Label
+                const efficiency = parseInt(data.taskEfficiency);
+                const efficiencyProgress = document.getElementById('stat-taskEfficiencyProgress');
+                const efficiencyLabel = document.getElementById('stat-taskEfficiencyLabel');
+                
+                if (efficiencyProgress) {
+                    efficiencyProgress.style.width = efficiency + '%';
+                }
+                if (efficiencyLabel) {
+                    efficiencyLabel.textContent = efficiency + '%';
+                }
                 
                 // Update chart dynamically
                 if (growthChart && data.staffPerformance) {
@@ -379,7 +459,7 @@
                             </td>
                             <td class="px-8 py-4">
                                 <span class="px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider ${c.status === 'active' ? 'bg-emerald-50 text-emerald-800' : (c.status === 'lead' ? 'bg-orange-50 text-orange-800' : 'bg-slate-100 text-slate-600')}">
-                                    ${c.status}
+                                        ${c.status}
                                 </span>
                             </td>
                             <td class="px-8 py-4 text-xs font-medium text-muted-veltrix">{{ __('messages.just_now') }}</td>

@@ -50,10 +50,10 @@ class GoogleAuthTest extends TestCase
     {
         // Arrange: Create existing user
         User::factory()->create([
-            'email' => 'ramuparasa02@gmail.com',
+            'email' => 'veltrixcrm@gmail.com',
         ]);
 
-        $this->mockGoogleUser('google-123', 'ramuparasa02@gmail.com', 'Ramu');
+        $this->mockGoogleUser('google-123', 'veltrixcrm@gmail.com', 'Ramu');
 
         // Act: Callback with 'register' in session
         $response = $this->withSession([
@@ -179,11 +179,11 @@ class GoogleAuthTest extends TestCase
     {
         // Arrange: Create existing user
         $user = User::factory()->create([
-            'email' => 'ramuparasa02@gmail.com',
+            'email' => 'veltrixcrm@gmail.com',
             'role' => 'staff'
         ]);
 
-        $this->mockGoogleUser('google-123', 'ramuparasa02@gmail.com', 'Ramu');
+        $this->mockGoogleUser('google-123', 'veltrixcrm@gmail.com', 'Ramu');
 
         // Act: Callback with 'login' in session
         $response = $this->withSession([

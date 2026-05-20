@@ -174,7 +174,7 @@
         </div>
         <div class="footer">
             <p>© {{ date('Y') }} VeltrixCRM. All rights reserved.</p>
-            <p>Need support? Please contact our <a href="mailto:ramuparasa02@gmail.com">Security Operations Team</a>.</p>
+            <p>Need support? Please contact our <a href="mailto:veltrixcrm@gmail.com">Security Operations Team</a>.</p>
         </div>
     </div>
 </body>

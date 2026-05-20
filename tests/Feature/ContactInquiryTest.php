@@ -45,7 +45,7 @@ class ContactInquiryTest extends TestCase
         $response->assertSessionHas('contact_success');
 
         Mail::assertSent(ContactInquiry::class, function (ContactInquiry $mail) {
-            return $mail->hasTo('ramuparasa02@gmail.com') &&
+            return $mail->hasTo('veltrixcrm@gmail.com') &&
                    $mail->name === 'Ramu Parasa' &&
                    $mail->email === 'ramu.inquirer@example.com' &&
                    $mail->messageBody === 'Hello Veltrix, I would like to schedule a custom trial.';

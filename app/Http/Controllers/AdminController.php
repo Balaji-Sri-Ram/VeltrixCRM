@@ -23,22 +23,100 @@ class AdminController extends Controller
             ->withCount(['customers', 'tasks'])
             ->get(['id', 'name']);
 
+        $now = now();
+        
+        // 1. Customer Growth
+        $last30DaysCustomers = Customer::where('created_at', '>=', $now->copy()->subDays(30))->count();
+        $prev30DaysCustomers = Customer::where('created_at', '>=', $now->copy()->subDays(60))
+            ->where('created_at', '<', $now->copy()->subDays(30))
+            ->count();
+        $customerGrowth = $prev30DaysCustomers > 0 
+            ? round((($last30DaysCustomers - $prev30DaysCustomers) / $prev30DaysCustomers) * 100, 1) 
+            : ($last30DaysCustomers > 0 ? 100.0 : 0.0);
+
+        // 2. Online Staff
+        $activeThreshold = $now->copy()->subMinutes(5)->getTimestamp();
+        $onlineStaffCount = \DB::table('sessions')
+            ->where('last_activity', '>=', $activeThreshold)
+            ->whereNotNull('user_id')
+            ->whereIn('user_id', function($query) {
+                $query->select('id')->from('users')->where('role', 'staff');
+            })
+            ->distinct('user_id')
+            ->count('user_id');
+
+        // 3. Task Growth
+        $last30DaysTasks = Task::where('created_at', '>=', $now->copy()->subDays(30))->count();
+        $prev30DaysTasks = Task::where('created_at', '>=', $now->copy()->subDays(60))
+            ->where('created_at', '<', $now->copy()->subDays(30))
+            ->count();
+        $taskGrowth = $prev30DaysTasks > 0 
+            ? round((($last30DaysTasks - $prev30DaysTasks) / $prev30DaysTasks) * 100, 1) 
+            : ($last30DaysTasks > 0 ? 100.0 : 0.0);
+
+        // 4. Task Completion Efficiency
+        $taskEfficiency = $totalTasks > 0 ? (int)round(($completedTasks / $totalTasks) * 100) : 0;
+
         return view('admin.dashboard', compact(
-            'totalCustomers', 'totalStaff', 'totalTasks', 'completedTasks', 'recentActivities', 'recentCustomers', 'staffPerformance'
+            'totalCustomers', 'totalStaff', 'totalTasks', 'completedTasks', 'recentActivities', 'recentCustomers', 'staffPerformance',
+            'customerGrowth', 'onlineStaffCount', 'taskGrowth', 'taskEfficiency'
         ));
     }
 
     public function getStats()
     {
+        $totalCustomers = Customer::count();
+        $totalStaff = User::where('role', 'staff')->count();
+        $totalTasks = Task::count();
+        $completedTasks = Task::where('status', 'completed')->count();
+
         $staffPerformance = User::where('role', 'staff')
             ->withCount(['customers', 'tasks'])
             ->get(['id', 'name']);
 
+        $now = now();
+        
+        // 1. Customer Growth
+        $last30DaysCustomers = Customer::where('created_at', '>=', $now->copy()->subDays(30))->count();
+        $prev30DaysCustomers = Customer::where('created_at', '>=', $now->copy()->subDays(60))
+            ->where('created_at', '<', $now->copy()->subDays(30))
+            ->count();
+        $customerGrowth = $prev30DaysCustomers > 0 
+            ? round((($last30DaysCustomers - $prev30DaysCustomers) / $prev30DaysCustomers) * 100, 1) 
+            : ($last30DaysCustomers > 0 ? 100.0 : 0.0);
+
+        // 2. Online Staff
+        $activeThreshold = $now->copy()->subMinutes(5)->getTimestamp();
+        $onlineStaffCount = \DB::table('sessions')
+            ->where('last_activity', '>=', $activeThreshold)
+            ->whereNotNull('user_id')
+            ->whereIn('user_id', function($query) {
+                $query->select('id')->from('users')->where('role', 'staff');
+            })
+            ->distinct('user_id')
+            ->count('user_id');
+
+        // 3. Task Growth
+        $last30DaysTasks = Task::where('created_at', '>=', $now->copy()->subDays(30))->count();
+        $prev30DaysTasks = Task::where('created_at', '>=', $now->copy()->subDays(60))
+            ->where('created_at', '<', $now->copy()->subDays(30))
+            ->count();
+        $taskGrowth = $prev30DaysTasks > 0 
+            ? round((($last30DaysTasks - $prev30DaysTasks) / $prev30DaysTasks) * 100, 1) 
+            : ($last30DaysTasks > 0 ? 100.0 : 0.0);
+
+        // 4. Task Completion Efficiency
+        $taskEfficiency = $totalTasks > 0 ? (int)round(($completedTasks / $totalTasks) * 100) : 0;
+
         return response()->json([
-            'totalCustomers' => Customer::count(),
-            'totalStaff' => User::where('role', 'staff')->count(),
-            'totalTasks' => Task::count(),
-            'completedTasks' => Task::where('status', 'completed')->count(),
+            'totalCustomers' => $totalCustomers,
+            'totalStaff' => $totalStaff,
+            'totalTasks' => $totalTasks,
+            'completedTasks' => $completedTasks,
+            'customerGrowth' => $customerGrowth,
+            'onlineStaffCount' => $onlineStaffCount,
+            'taskGrowth' => $taskGrowth,
+            'taskEfficiency' => $taskEfficiency,
             'recentCustomers' => Customer::latest()->take(5)->get(),
             'recentActivities' => ActivityLog::latest()->take(5)->get(),
             'staffPerformance' => $staffPerformance,
