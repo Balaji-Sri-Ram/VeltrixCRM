@@ -21,8 +21,8 @@ class ContactController extends Controller
         ]);
 
         try {
-            // Send inquiry to the administrator's email ramuparasa02@gmail.com
-            Mail::to('ramuparasa02@gmail.com')->send(new ContactInquiry(
+            // Send inquiry to the administrator's email veltrixcrm@gmail.com
+            Mail::to('veltrixcrm@gmail.com')->send(new ContactInquiry(
                 $validated['name'],
                 $validated['email'],
                 $validated['message']

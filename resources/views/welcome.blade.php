@@ -10,8 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        /* Transitions handled by GSAP or CSS when active */
-        .reveal { transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        /* Removed unused .reveal transition to prevent layout/pinning conflicts */
         
         /* Success bounce animation */
         @keyframes bounceIn {
@@ -61,19 +60,20 @@
             border: 1px solid var(--color-border-soft);
             box-shadow: 0 10px 30px -8px rgba(45, 58, 45, 0.08);
             background-color: var(--color-bg-card);
-            transition: box-shadow 0.5s ease;
             will-change: transform, opacity;
-        }
-
-        .hero-card:hover {
-            box-shadow: 0 20px 45px -12px rgba(45, 58, 45, 0.18);
+            backface-visibility: hidden;
+            contain: layout style paint;
+            perspective: 1000px;
+            /* INITIAL STATE FOR ANIMATION - PREVENTS FLASH */
+            opacity: 0;
+            transform: translate3d(0, 0, 0) scale(0.9);
         }
 
         .hero-card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .hero-card:hover .hero-card-img {
@@ -278,7 +278,7 @@
         </section>
 
         <!-- Trust Section -->
-        <section class="scroll-section py-20 border-y border-[var(--color-border-soft)] reveal">
+        <section class="scroll-section py-20 border-y border-[var(--color-border-soft)]">
             <div class="container-boxed">
                 <p class="text-center text-[10px] font-bold tracking-[0.3em] text-[var(--color-graphite)] uppercase mb-12 opacity-80">{{ __('messages.trust_heading') }}</p>
                 <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale contrast-125">
@@ -292,7 +292,7 @@
         </section>
 
         <!-- Features Section -->
-        <section id="features" class="scroll-section min-h-[140vh] py-20 reveal relative">
+        <section id="features" class="scroll-section min-h-[140vh] py-20 relative">
             <div class="container-boxed">
                 <div class="text-center max-w-3xl mx-auto mb-12 opacity-0">
                     <h2 class="heading-editorial text-4xl lg:text-5xl mb-6">{{ __('messages.features_heading') }}</h2>
@@ -341,7 +341,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="scroll-section py-32 bg-[var(--color-bg-card)] border-y border-[var(--color-border-soft)] reveal">
+        <section id="contact" class="scroll-section py-32 bg-[var(--color-bg-card)] border-y border-[var(--color-border-soft)]">
             <div class="container-boxed">
                 <div class="grid lg:grid-cols-2 gap-20 items-center">
                     <div>
@@ -355,7 +355,7 @@
                                 </div>
                                 <div>
                                     <h4 class="text-xs font-bold uppercase tracking-widest text-[var(--color-charcoal)] mb-1">{{ __('messages.contact_email') }}</h4>
-                                    <p class="text-sm text-muted-veltrix font-medium">ramuparasa02@gmail.com</p>
+                                    <p class="text-sm text-muted-veltrix font-medium">veltrixcrm@gmail.com</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-5">

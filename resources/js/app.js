@@ -14,9 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gestureDirection: 'vertical',
         smooth: true,
         smoothWheel: true,
-        syncTouch: true, // synchronize scroll on touchpads and touchscreens
-        syncTouchLerp: 0.08,
-        touchMultiplier: 1.5,
+        syncTouch: false, // use native scroll on touch devices for maximum performance
         infinite: false,
     });
 
@@ -79,9 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Premium Spread Animation for Hero Cards
     const heroCards = Array.from(document.querySelectorAll('.hero-card'));
     if (heroCards.length === 6) {
+        // The anchor point is Column 1 Row 2 position (card-1 is in col-1 with margin-top acting as row 2)
         const anchorCard = heroCards[0];
         
-        // Use a slight delay or RAF to ensure layout is completely settled
+        // Wait for layout to settle and CSS to apply
         requestAnimationFrame(() => {
             const anchorRect = anchorCard.getBoundingClientRect();
             
@@ -93,29 +92,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
             });
 
-            heroCards.forEach((card, index) => {
-                tl.fromTo(card,
-                    { x: cardDeltas[index].dx, y: cardDeltas[index].dy, scale: 0.7, opacity: 0 },
-                    { x: 0, y: 0, scale: 1, opacity: 1, duration: 1.4, ease: 'power4.out' },
-                    index === 0 ? '-=0.8' : `-=${1.3}`
-                );
-            });
-
-            // Idle Float Animation
-            tl.add(() => {
-                heroCards.forEach((card, i) => {
-                    gsap.to(card, {
-                        yPercent: -3,
-                        duration: 2.5 + i * 0.2,
-                        ease: "sine.inOut",
-                        yoyo: true,
-                        repeat: -1,
-                        delay: i * 0.15
-                    });
+            // 1. INSTANTLY force all cards to the shared origin state BEFORE they become visible
+            // This guarantees absolutely ZERO flash or layout shift.
+            heroCards.forEach((card, i) => {
+                gsap.set(card, {
+                    x: cardDeltas[i].dx,
+                    y: cardDeltas[i].dy,
+                    scale: 0.9,
+                    opacity: 0,
+                    force3D: true // Hardware acceleration (translate3d)
                 });
             });
 
-            // Scroll-linked Collapse
+            // 2. Animate them outward smoothly to their natural grid positions
+            heroCards.forEach((card, index) => {
+                tl.to(card, {
+                    x: 0, 
+                    y: 0, 
+                    scale: 1, 
+                    opacity: 1, 
+                    duration: 1.4, 
+                    ease: 'power4.out', // Extremely smooth premium easing similar to cubic-bezier(0.22, 1, 0.36, 1)
+                    force3D: true
+                }, index === 0 ? '-=0.8' : `-=${1.25}`);
+            });
+
+            const idleTweens = [];
+            // Idle Float Animation (Subtle continuous movement)
+            tl.add(() => {
+                heroCards.forEach((card, i) => {
+                    idleTweens.push(
+                        gsap.to(card, {
+                            yPercent: -4,
+                            duration: 3 + i * 0.3,
+                            ease: "sine.inOut",
+                            yoyo: true,
+                            repeat: -1,
+                            delay: i * 0.2
+                        })
+                    );
+                });
+            });
+
+            // Scroll-linked Collapse Effect (Scroll down away from hero)
             const heroSection = document.querySelector('section.pt-2');
             const nextSection = document.querySelector('.scroll-section');
             
@@ -126,16 +145,31 @@ document.addEventListener('DOMContentLoaded', () => {
                         start: 'top top',
                         endTrigger: nextSection,
                         end: 'top top',
-                        scrub: 1,
+                        scrub: 1.2, // smoother spring scrub
+                        fastScrollEnd: true,
+                        preventOverlaps: true,
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            if (self.progress > 0) {
+                                // Pause idle floating to completely prevent transform matrix recalculation fighting
+                                idleTweens.forEach(t => t.pause());
+                            } else if (self.progress === 0) {
+                                // Resume idle float seamlessly when back at the exact top
+                                idleTweens.forEach(t => t.play());
+                            }
+                        }
                     }
                 });
 
+                // Collapse all cards back to the exact same shared origin
                 heroCards.forEach((card, index) => {
                     collapseTl.to(card, {
                         x: cardDeltas[index].dx,
                         y: cardDeltas[index].dy,
-                        scale: 0.7,
+                        yPercent: 0, // Reset yPercent to perfectly align into the origin stack without jitter
+                        scale: 0.9,
                         opacity: 0,
+                        force3D: true, // Force GPU acceleration
                         ease: 'none'
                     }, 0);
                 });
@@ -185,7 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     yPercent: -10,       // subtle vertical shift
                     scale: 0.95,         // premium scaling recession
                     opacity: 0.15,       // slowly becomes low opacity to disappear
-                    filter: 'blur(3px)',  // optimized premium cinematic blur (GPU friendly)
                     ease: 'none',
                     scrollTrigger: {
                         trigger: nextSection,
@@ -233,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
         swapTimeline.to('.features-row-1', {
             opacity: 0,
             y: -50,
+            pointerEvents: 'none',
             duration: 0.4,
             ease: 'power2.inOut',
         })

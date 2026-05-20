@@ -52,24 +52,31 @@
 
                 <!-- Visual Element: Dashboard Cards Preview -->
                 <div class="space-y-6 animate-in-up" style="opacity: 0;">
-                    <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-[32px] shadow-2xl flex items-center gap-6">
-                        <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white">
+                    <div class="group bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-[32px] shadow-2xl flex items-center gap-6 hover:bg-white/10 hover:-translate-y-1 transition-all duration-500 cursor-default">
+                        <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-white/20 transition-all duration-500">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                         </div>
                         <div>
-                            <div class="h-2 w-24 bg-white/20 rounded-full mb-3"></div>
-                            <div class="h-1.5 w-16 bg-white/10 rounded-full"></div>
+                            <div class="text-white font-bold text-base mb-1 tracking-wide">Revenue Scaled</div>
+                            <div class="text-white/60 text-[10px] uppercase tracking-widest font-bold">Acme Corp Deal Closed</div>
                         </div>
-                        <div class="ml-auto text-white font-bold text-lg">+12.5%</div>
+                        <div class="ml-auto text-white font-bold text-lg group-hover:text-emerald-400 transition-colors">+12.5%</div>
                     </div>
                     
-                    <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-[32px] shadow-2xl flex items-center gap-6 translate-x-12">
-                        <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white">
+                    <div class="group bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-[32px] shadow-2xl flex items-center gap-6 translate-x-12 hover:bg-white/10 hover:-translate-y-1 transition-all duration-500 cursor-default">
+                        <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-white/20 transition-all duration-500">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                         </div>
-                        <div class="space-y-2">
-                            <div class="h-2 w-32 bg-white/20 rounded-full"></div>
-                            <div class="h-1.5 w-20 bg-white/10 rounded-full"></div>
+                        <div class="space-y-1">
+                            <div class="text-white font-bold text-base tracking-wide">New Enterprise Leads</div>
+                            <div class="flex items-center gap-2 pt-1">
+                                <div class="flex -space-x-2">
+                                    <div class="w-6 h-6 rounded-full bg-blue-500 border-2 border-[var(--color-primary)] flex items-center justify-center text-[10px] font-bold text-white shadow-md group-hover:-translate-y-1 transition-transform delay-75">S</div>
+                                    <div class="w-6 h-6 rounded-full bg-emerald-500 border-2 border-[var(--color-primary)] flex items-center justify-center text-[10px] font-bold text-white shadow-md group-hover:-translate-y-1 transition-transform delay-100">A</div>
+                                    <div class="w-6 h-6 rounded-full bg-amber-500 border-2 border-[var(--color-primary)] flex items-center justify-center text-[10px] font-bold text-white shadow-md group-hover:-translate-y-1 transition-transform delay-150">E</div>
+                                </div>
+                                <span class="text-white/60 text-[10px] uppercase tracking-widest font-bold ml-1">+24 this week</span>
+                            </div>
                         </div>
                     </div>
                 </div>

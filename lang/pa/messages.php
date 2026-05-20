@@ -1,6 +1,6 @@
 <?php
 return [
-    'welcome' => 'AI CRM ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ',
+    'welcome' => 'VeltrixCRM ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ',
     'dashboard' => 'ਡੈਸ਼ਬੋਰਡ',
     'customers' => 'ਗਾਹਕ',
     'staff' => 'ਸਟਾਫ ਪ੍ਰਬੰਧਨ',

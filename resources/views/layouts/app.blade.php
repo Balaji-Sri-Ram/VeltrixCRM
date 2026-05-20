@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'AI CRM') }} - @yield('title', 'Welcome')</title>
+    <title>{{ config('app.name', 'VeltrixCRM') }} - @yield('title', 'Welcome')</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +41,7 @@
     <!-- Navigation -->
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 w-full px-8 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold text-blue-600">
-            <a href="{{ route('home') }}">AI CRM</a>
+            <a href="{{ route('home') }}">VeltrixCRM</a>
         </div>
         <div class="flex space-x-6 items-center">
             <!-- Language Switcher -->
@@ -83,7 +83,7 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-slate-500 mt-auto z-10">
-        &copy; {{ date('Y') }} AI-Powered CRM. All rights reserved.
+        &copy; {{ date('Y') }} VeltrixCRM. All rights reserved.
     </footer>
 
     <!-- Scripts -->

@@ -117,7 +117,7 @@ html.lenis, html.lenis body {
 }
 
 .scroll-section .container-boxed {
-    will-change: transform, opacity, filter;
+    will-change: transform, opacity;
     transform-style: preserve-3d;
     backface-visibility: hidden;
 }

@@ -74,13 +74,17 @@
 
                 <!-- Visual Element: Abstract Analytics Widgets -->
                 <div class="space-y-6 animate-in-up">
-                    <div class="card-veltrix bg-white !p-6 shadow-xl border-[var(--color-border-soft)] flex items-center gap-6">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                    <div class="group card-veltrix bg-white !p-6 shadow-xl border-[var(--color-border-soft)] flex items-center gap-6 hover:-translate-y-2 transition-all duration-500 cursor-default">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-100 transition-all duration-500 shadow-sm">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                         </div>
                         <div>
-                            <div class="h-2 w-24 bg-[var(--color-primary)]/10 rounded-full mb-2"></div>
-                            <div class="h-1.5 w-16 bg-[var(--color-bg-base)] rounded-full"></div>
+                            <div class="font-bold text-[var(--color-charcoal)] mb-1 tracking-wide">Encrypted Channel</div>
+                            <div class="text-[10px] font-bold text-muted-veltrix uppercase tracking-widest">End-to-End Security</div>
+                        </div>
+                        <div class="ml-auto flex items-center gap-2">
+                            <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Secure</span>
+                            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                         </div>
                     </div>
                 </div>
@@ -538,7 +542,7 @@
             
             // Visual feedback transitions
             if(step === 2) {
-                document.getElementById('visual-headline').textContent = "Verify Identity Identity.";
+                document.getElementById('visual-headline').textContent = "Verify Identity.";
                 document.getElementById('visual-subtext').textContent = "We've transmitted a specialized security token to your account email for authorization.";
             } else if(step === 3) {
                 document.getElementById('visual-headline').textContent = "Get Back to Managing Your Business.";
@@ -577,10 +581,20 @@
         function checkStrength(pass) {
             const meters = document.getElementById('strength-meter').children;
             const text = document.getElementById('strength-text');
+            
             let score = 0;
-            if (pass.length > 5) score++;
-            if (pass.length > 8) score++;
-            if (/[A-Z]/.test(pass) && /[0-9]/.test(pass)) score++;
+            if (pass.length > 0) {
+                score = 1; // Default Weak
+                
+                if (pass.length >= 6) {
+                    score = 2; // Medium
+                    
+                    // Upgrade to Strong if length >= 8 OR has capital OR has special char
+                    if (pass.length >= 8 || /[A-Z]/.test(pass) || /[^a-zA-Z0-9]/.test(pass)) {
+                        score = 3; // Strong
+                    }
+                }
+            }
 
             for (let i = 0; i < 3; i++) {
                 meters[i].className = 'flex-1 bg-[var(--color-border-soft)] rounded-full transition-all duration-500';
@@ -589,8 +603,14 @@
                     meters[i].classList.add(score === 1 ? 'bg-orange-400' : (score === 2 ? 'bg-yellow-400' : 'bg-emerald-500'));
                 }
             }
-            text.textContent = `Password Strength: ${score === 1 ? 'Weak' : (score === 2 ? 'Medium' : 'High Security')}`;
-            text.className = `text-[9px] font-bold uppercase tracking-widest mt-2 ${score === 1 ? 'text-orange-500' : (score === 2 ? 'text-yellow-600' : 'text-emerald-600')}`;
+            
+            if (score === 0) {
+                text.textContent = 'Password Strength: Required';
+                text.className = 'text-[9px] font-bold uppercase tracking-widest mt-2 text-muted-veltrix opacity-60';
+            } else {
+                text.textContent = `Password Strength: ${score === 1 ? 'Weak' : (score === 2 ? 'Medium' : 'High Security')}`;
+                text.className = `text-[9px] font-bold uppercase tracking-widest mt-2 ${score === 1 ? 'text-orange-500' : (score === 2 ? 'text-yellow-600' : 'text-emerald-600')}`;
+            }
         }
     </script>
 </body>

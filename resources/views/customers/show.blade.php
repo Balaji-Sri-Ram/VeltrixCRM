@@ -33,7 +33,7 @@
                 <!-- WhatsApp Integration Button (wa.me) -->
                 @php
                     $phone = preg_replace('/[^0-9]/', '', $customer->phone ?? '');
-                    $message = urlencode("Hello " . $customer->name . ", this is a message from AI CRM.");
+                    $message = urlencode("Hello " . $customer->name . ", this is a message from VeltrixCRM.");
                     $waLink = "https://wa.me/" . $phone . "?text=" . $message;
                 @endphp
                 <a href="{{ $phone ? $waLink : '#' }}" target="_blank" class="{{ !$phone ? 'opacity-50 cursor-not-allowed' : '' }} flex items-center justify-center space-x-2 bg-[#25D366] hover:bg-[#1ebd5c] text-white font-medium py-3 px-6 rounded-lg transition-all">
@@ -77,7 +77,7 @@
                 <div class="bg-blue-50 border border-blue-100 rounded-xl p-6">
                     <p class="text-slate-700 mb-4">Based on {{ $customer->name }}'s status as a <strong class="text-blue-700">{{ $customer->status }}</strong>, here is a suggested message:</p>
                     <div class="relative">
-                        <textarea class="w-full bg-white border border-slate-300 rounded-lg p-4 text-slate-700 focus:ring-2 focus:ring-blue-500 outline-none" rows="4" readonly>Hi {{ $customer->name }},&#10;&#10;I noticed you are currently a {{ $customer->status }} in our system. I wanted to reach out and see how we can assist you further today. Let me know if you need anything!&#10;&#10;Best,&#10;AI CRM Team</textarea>
+                        <textarea class="w-full bg-white border border-slate-300 rounded-lg p-4 text-slate-700 focus:ring-2 focus:ring-blue-500 outline-none" rows="4" readonly>Hi {{ $customer->name }},&#10;&#10;I noticed you are currently a {{ $customer->status }} in our system. I wanted to reach out and see how we can assist you further today. Let me know if you need anything!&#10;&#10;Best,&#10;VeltrixCRM Team</textarea>
                         <button class="absolute bottom-4 right-4 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 px-3 py-1.5 rounded-md text-sm font-medium transition shadow-sm">
                             Copy text
                         </button>

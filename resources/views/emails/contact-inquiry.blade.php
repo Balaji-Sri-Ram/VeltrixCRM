@@ -28,40 +28,7 @@
             text-align: center;
             position: relative;
         }
-        .header-decoration {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 120px;
-            height: 120px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 50%;
-            transform: translate(40px, -40px);
-        }
-        .header-decoration-2 {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 50%;
-            transform: translate(-30px, 30px);
-        }
-        .logo-badge {
-            display: inline-block;
-            width: 48px;
-            height: 48px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 14px;
-            line-height: 48px;
-            text-align: center;
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 22px;
-            margin-bottom: 16px;
-        }
+
         .logo {
             color: #ffffff;
             font-size: 26px;
@@ -103,6 +70,11 @@
             padding: 28px;
             margin: 32px 0;
             border: 1px solid #E5E2DC;
+            transition: all 0.3s ease;
+        }
+        .inquiry-card:hover {
+            box-shadow: 0 8px 24px rgba(45, 58, 45, 0.08);
+            transform: translateY(-2px);
         }
         .inquiry-card-title {
             margin: 0 0 20px 0;
@@ -192,6 +164,12 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             box-shadow: 0 4px 12px rgba(45, 58, 45, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-reply:hover {
+            background-color: #3e4e3e;
+            box-shadow: 0 6px 16px rgba(45, 58, 45, 0.25);
+            transform: translateY(-2px);
         }
         .footer {
             background-color: #F5F3EF;
@@ -227,9 +205,6 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="header-decoration"></div>
-            <div class="header-decoration-2"></div>
-            <div class="logo-badge">V</div>
             <h2 class="logo">Veltrix<span>CRM</span></h2>
             <div class="subtitle">New Contact Inquiry</div>
         </div>

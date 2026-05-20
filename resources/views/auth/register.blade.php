@@ -48,20 +48,20 @@
 
                 <!-- Visual Element: CRM Feature Cards -->
                 <div class="grid grid-cols-2 gap-6 animate-in-up" style="opacity: 0;">
-                    <div class="card-veltrix bg-white !p-6 shadow-xl border-[var(--color-border-soft)] group hover:-translate-y-2 transition-all duration-500">
-                        <div class="w-10 h-10 rounded-xl bg-[var(--color-bg-base)] text-[var(--color-primary)] flex items-center justify-center mb-4">
+                    <div class="card-veltrix bg-white !p-6 shadow-xl shadow-[var(--color-primary)]/5 border-[var(--color-border-soft)] group hover:-translate-y-2 transition-all duration-500 cursor-default">
+                        <div class="w-10 h-10 rounded-xl bg-[var(--color-bg-base)] text-[var(--color-primary)] flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-[var(--color-primary)] group-hover:text-white transition-all duration-500">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                         </div>
-                        <div class="h-2 w-16 bg-[var(--color-primary)]/10 rounded-full mb-2"></div>
-                        <div class="h-1.5 w-10 bg-[var(--color-bg-base)] rounded-full"></div>
+                        <div class="font-bold text-[var(--color-charcoal)] mb-1">Sarah Jenkins</div>
+                        <div class="text-[10px] font-bold text-muted-veltrix uppercase tracking-widest">Added as Manager</div>
                     </div>
                     
-                    <div class="card-veltrix bg-white !p-6 shadow-xl border-[var(--color-border-soft)] mt-8 group hover:-translate-y-2 transition-all duration-500">
-                        <div class="w-10 h-10 rounded-xl bg-[var(--color-bg-base)] text-[var(--color-accent)] flex items-center justify-center mb-4">
+                    <div class="card-veltrix bg-white !p-6 shadow-xl shadow-[var(--color-accent)]/5 border-[var(--color-border-soft)] mt-8 group hover:-translate-y-2 transition-all duration-500 cursor-default">
+                        <div class="w-10 h-10 rounded-xl bg-[var(--color-bg-base)] text-[var(--color-accent)] flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-[var(--color-accent)] group-hover:text-white transition-all duration-500">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                         </div>
-                        <div class="h-2 w-12 bg-[var(--color-accent)]/10 rounded-full mb-2"></div>
-                        <div class="h-1.5 w-16 bg-[var(--color-bg-base)] rounded-full"></div>
+                        <div class="font-bold text-[var(--color-charcoal)] mb-1">Q3 Projections</div>
+                        <div class="text-[10px] font-bold text-muted-veltrix uppercase tracking-widest">+42% Growth Tracker</div>
                     </div>
                 </div>
             </div>

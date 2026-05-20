@@ -60,7 +60,7 @@
                 <div class="mb-12 animate-in-left" style="opacity: 0;">
                     <div class="w-12 h-12 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center text-white font-bold text-xl mb-8 shadow-lg shadow-[var(--color-primary)]/20">V</div>
                     <div class="inline-flex items-center gap-2 bg-white/80 border border-[var(--color-border-soft)] rounded-full px-4 py-1.5 text-xs font-semibold text-[var(--color-primary)] mb-6 shadow-sm">
-                        <img src="{{ $googleUser['avatar'] }}" alt="Google Avatar" class="w-5 h-5 rounded-full">
+                        <img src="{{ $googleUser['avatar'] }}" alt="Google Avatar" class="w-5 h-5 rounded-full" referrerpolicy="no-referrer">
                         <span>Connected via Google OAuth</span>
                     </div>
                     <h1 class="heading-editorial text-5xl text-[var(--color-charcoal)] mb-6 leading-tight">One Step Closer to Operational Clarity.</h1>
@@ -68,12 +68,18 @@
                 </div>
 
                 <!-- Live Identity Preview Card -->
-                <div class="card-veltrix bg-white !p-8 shadow-xl border-[var(--color-border-soft)] animate-in-up" style="opacity: 0;">
-                    <div class="flex items-center gap-4">
-                        <img src="{{ $googleUser['avatar'] }}" alt="Avatar" class="w-16 h-16 rounded-2xl border border-[var(--color-border-soft)] object-cover shadow-sm">
+                <div class="group card-veltrix bg-white !p-8 shadow-xl border-[var(--color-border-soft)] animate-in-up hover:-translate-y-2 transition-all duration-500 cursor-default" style="opacity: 0;">
+                    <div class="flex items-center gap-5">
+                        <div class="relative">
+                            <img src="{{ $googleUser['avatar'] }}" alt="Avatar" class="w-16 h-16 rounded-2xl border border-[var(--color-border-soft)] object-cover shadow-sm group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer">
+                            <div class="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full"></div>
+                        </div>
                         <div>
-                            <h3 class="font-bold text-lg text-[var(--color-charcoal)]">{{ $googleUser['name'] }}</h3>
+                            <h3 class="font-bold text-lg text-[var(--color-charcoal)] group-hover:text-[var(--color-primary)] transition-colors">{{ $googleUser['name'] }}</h3>
                             <p class="text-sm text-muted-veltrix">{{ $googleUser['email'] }}</p>
+                            <div class="mt-2.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-100 text-[9px] font-bold uppercase tracking-widest text-emerald-600">
+                                <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div> Identity Verified
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +94,7 @@
                 <div class="lg:hidden mb-12 flex items-center gap-4">
                     <div class="w-12 h-12 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center text-white font-bold text-xl">V</div>
                     <div class="inline-flex items-center gap-2 bg-[var(--color-bg-card)] border border-[var(--color-border-soft)] rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--color-primary)] shadow-sm">
-                        <img src="{{ $googleUser['avatar'] }}" alt="Avatar" class="w-4 h-4 rounded-full">
+                        <img src="{{ $googleUser['avatar'] }}" alt="Avatar" class="w-4 h-4 rounded-full" referrerpolicy="no-referrer">
                         <span>Authorized</span>
                     </div>
                 </div>
