@@ -459,7 +459,7 @@
                 <div>
                     <h5 class="text-[10px] font-bold uppercase tracking-widest text-[var(--color-charcoal)] mb-8">{{ __('messages.footer_col_2') }}</h5>
                     <ul class="space-y-4 text-xs font-bold text-muted-veltrix uppercase tracking-[0.15em]">
-                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-colors">{{ __('messages.about') }}</a></li>
+                        <li><a href="{{ route('about') }}" class="hover:text-[var(--color-primary)] transition-colors">{{ __('messages.about') }}</a></li>
                         <li><a href="#contact" class="hover:text-[var(--color-primary)] transition-colors">{{ __('messages.contact') }}</a></li>
                         <li><a href="#" class="hover:text-[var(--color-primary)] transition-colors">{{ __('messages.security') }}</a></li>
                     </ul>
