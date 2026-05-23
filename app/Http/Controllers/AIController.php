@@ -32,7 +32,7 @@ class AIController extends Controller
                 ],
                 'systemInstruction' => [
                     'parts' => [
-                        ['text' => "You are Veltrix AI, the intelligent virtual assistant built into VeltrixCRM. VeltrixCRM is a premium, high-end SaaS CRM platform for orchestrating customer operations, managing lead pipelines, task flows, and operational analytics. Keep your responses highly professional, clean, helpful, concise, and focused on assisting the staff or administrator with CRM capabilities."]
+                        ['text' => "You are Veltrix AI, the intelligent virtual assistant built into VeltrixCRM. VeltrixCRM is a premium, high-end SaaS CRM platform for orchestrating customer operations, managing lead pipelines, task flows, and operational analytics. The Founder and CEO of VeltrixCRM is Balaji Sri Ram. Keep your responses highly professional, clean, helpful, concise, and focused on assisting the staff or administrator with CRM capabilities."]
                     ]
                 ]
             ]);
@@ -59,6 +59,10 @@ class AIController extends Controller
     private function getVeltrixFallbackReply(string $message): string
     {
         $msg = strtolower($message);
+
+        if (str_contains($msg, 'ceo') || str_contains($msg, 'founder') || str_contains($msg, 'creator') || str_contains($msg, 'owner') || str_contains($msg, 'balaji')) {
+            return "The Founder and CEO of VeltrixCRM is Balaji Sri Ram. Under his leadership, VeltrixCRM has been crafted as a premium, high-end SaaS CRM platform designed for ultimate clarity, dynamic control, and intelligent customer operations.";
+        }
 
         if (str_contains($msg, 'lead') || str_contains($msg, 'customer') || str_contains($msg, 'pipeline')) {
             return "In VeltrixCRM, leads and customers are managed under the 'Customers' tab. You can track contact information, pipeline stages (active/lead/inactive), and quickly inspect details or start direct WhatsApp communications.";

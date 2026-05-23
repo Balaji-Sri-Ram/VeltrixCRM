@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>VeltrixCRM - @yield('title', 'Dashboard')</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,6 +59,29 @@
             </div>
             <h2 class="heading-editorial text-2xl mb-2">{{ __('messages.success') }}</h2>
             <p id="success-message-text" class="text-muted-veltrix text-sm">{{ __('messages.action_success') }}</p>
+        </div>
+    </div>
+
+    <!-- Confirm Clear Notifications Modal Overlay -->
+    <div id="confirm-clear-notifications-modal" onclick="closeConfirmClearModalOnOverlay(event)" class="fixed inset-0 z-[9999] hidden flex items-center justify-center bg-[var(--color-primary)]/10 backdrop-blur-md">
+        <!-- Confirm Clear Notifications Container -->
+        <div id="confirm-clear-notifications-container" class="bg-white w-full max-w-sm rounded-[32px] border border-[var(--color-border-soft)] shadow-2xl p-10 text-center transform scale-95 opacity-0 transition-all duration-500 relative">
+            <button onclick="closeConfirmClearModal()" class="absolute top-6 right-6 text-muted-veltrix hover:text-[var(--color-charcoal)] transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="w-16 h-16 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            </div>
+            <h2 class="heading-editorial text-2xl mb-2">Delete Notifications?</h2>
+            <p class="text-muted-veltrix text-sm mb-8">Are you sure you want to permanently delete all notifications? This action cannot be undone.</p>
+            <div class="flex space-x-4">
+                <button onclick="closeConfirmClearModal()" class="flex-1 py-3.5 rounded-2xl font-bold border border-[var(--color-border-soft)] text-muted-veltrix hover:bg-[var(--color-bg-card)] transition">
+                    Cancel
+                </button>
+                <button onclick="executeClearNotifications()" class="flex-1 py-3.5 rounded-2xl font-bold bg-[var(--color-accent)] text-white hover:opacity-90 transition shadow-lg shadow-[var(--color-accent)]/20">
+                    Delete All
+                </button>
+            </div>
         </div>
     </div>
 
@@ -293,7 +317,7 @@
                     <div id="notif-dropdown" class="absolute right-0 mt-3 w-80 bg-white rounded-3xl shadow-2xl border border-[var(--color-border-soft)] hidden z-[60] overflow-hidden">
                         <div class="p-5 border-b border-[var(--color-border-soft)] flex justify-between items-center bg-[var(--color-bg-card)]">
                             <h4 class="heading-editorial text-sm">{{ __('messages.notifications') }}</h4>
-                            <button onclick="clearNotifications()" class="text-[10px] font-bold text-[var(--color-primary)] hover:underline uppercase tracking-widest">{{ __('messages.clear_all') }}</button>
+                            <button onclick="clearNotifications(event)" class="text-[10px] font-bold text-[var(--color-primary)] hover:underline uppercase tracking-widest">{{ __('messages.clear_all') }}</button>
                         </div>
                         <div id="notif-list" class="max-h-64 overflow-y-auto">
                             <div class="p-8 text-center text-muted-veltrix text-xs">{{ __('messages.no_notifications') }}</div>
@@ -457,7 +481,16 @@
 
         bell.addEventListener('click', (e) => {
             e.stopPropagation();
+            const willOpen = dropdown.classList.contains('hidden');
             dropdown.classList.toggle('hidden');
+            if (willOpen) {
+                notifCount.classList.add('hidden'); // Optimistic UI update
+                markAllNotificationsAsRead();
+            }
+        });
+
+        dropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
 
         document.addEventListener('click', () => dropdown.classList.add('hidden'));
@@ -467,7 +500,7 @@
                 const response = await fetch("{{ route('notifications.index') }}");
                 const data = await response.json();
                 
-                if (data.unreadCount > 0) {
+                if (data.unreadCount > 0 && dropdown.classList.contains('hidden')) {
                     notifCount.classList.remove('hidden');
                 } else {
                     notifCount.classList.add('hidden');
@@ -481,6 +514,10 @@
                             <span class="text-[9px] font-bold text-muted-veltrix mt-2 block opacity-50">${new Date(n.created_at).toLocaleString()}</span>
                         </div>
                     `).join('');
+                } else {
+                    notifList.innerHTML = `
+                        <div class="p-8 text-center text-muted-veltrix text-xs">{{ __('messages.no_notifications') }}</div>
+                    `;
                 }
             } catch (error) {
                 console.error('Polling error:', error);
@@ -499,14 +536,64 @@
             }
         }
 
-        async function clearNotifications() {
-            if (!confirm('Clear all notifications?')) return;
+        async function markAllNotificationsAsRead() {
+            try {
+                await fetch("{{ route('notifications.readAll') }}", {
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" }
+                });
+                fetchNotifications();
+            } catch (error) {
+                console.error('Error marking all notifications as read:', error);
+            }
+        }
+
+        function clearNotifications(event) {
+            if (event) event.stopPropagation();
+            showConfirmClearModal();
+        }
+
+        function showConfirmClearModal() {
+            const modal = document.getElementById('confirm-clear-notifications-modal');
+            const container = document.getElementById('confirm-clear-notifications-container');
+            
+            if (modal) modal.classList.remove('hidden');
+            setTimeout(() => {
+                if (container) {
+                    container.classList.remove('scale-95', 'opacity-0');
+                    container.classList.add('scale-100', 'opacity-100');
+                }
+            }, 10);
+        }
+
+        function closeConfirmClearModal() {
+            const modal = document.getElementById('confirm-clear-notifications-modal');
+            const container = document.getElementById('confirm-clear-notifications-container');
+            
+            if (container) {
+                container.classList.remove('scale-100', 'opacity-100');
+                container.classList.add('scale-95', 'opacity-0');
+            }
+            setTimeout(() => {
+                if (modal) modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function closeConfirmClearModalOnOverlay(event) {
+            if (event.target === document.getElementById('confirm-clear-notifications-modal')) {
+                closeConfirmClearModal();
+            }
+        }
+
+        async function executeClearNotifications() {
+            closeConfirmClearModal();
             try {
                 await fetch("{{ route('notifications.clear') }}", {
                     method: 'DELETE',
                     headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" }
                 });
                 fetchNotifications();
+                showSuccessMessage('All notifications cleared successfully.');
             } catch (error) {
                 console.error('Error clearing notifications:', error);
             }

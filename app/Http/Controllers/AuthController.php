@@ -40,10 +40,10 @@ class AuthController extends Controller
             ]);
 
             if ($user->role === 'admin') {
-                return redirect()->intended('admin/dashboard');
+                return redirect('admin/dashboard');
             }
 
-            return redirect()->intended('staff/dashboard');
+            return redirect('staff/dashboard');
         }
 
         return back()->withErrors([

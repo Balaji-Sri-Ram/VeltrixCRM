@@ -100,6 +100,7 @@ Route::middleware(['auth'])->group(function () {
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.readAll');
     Route::delete('/notifications/clear', [NotificationController::class, 'clearAll'])->name('notifications.clear');
 
     // API Routes for Modals

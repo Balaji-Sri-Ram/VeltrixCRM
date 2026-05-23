@@ -112,7 +112,7 @@ return [
     'footer_desc' => 'The premium, natural-looking CRM for the modern enterprise. Built on trust, clarity, and intentional growth.',
     'footer_col_1' => 'Intelligence',
     'footer_col_2' => 'Foundation',
-    'about' => 'About',
+    'about' => 'About Us',
     'contact' => 'Contact',
     'security' => 'Security',
     'enterprise' => 'Enterprise',

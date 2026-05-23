@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VeltrixCRM | Premium SaaS Customer Management</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,11 +136,11 @@
                 <span class="font-bold text-xl tracking-tight text-[var(--color-charcoal)] transition-colors duration-300 group-hover:text-[var(--color-primary)]">Veltrix<span class="text-[var(--color-primary-light)] transition-colors duration-300 group-hover:text-[var(--color-primary)]">CRM</span></span>
             </a>
             
-            <!-- Nav Links -->
             <div class="hidden md:flex items-center gap-12">
-                <a href="#features" class="text-sm font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.features') }}</a>
-                <a href="#contact" class="text-sm font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.contact_us') }}</a>
-                <a href="{{ route('pricing') }}" class="text-sm font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.pricing') }}</a>
+                <a href="#features" class="text-xs font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.features') }}</a>
+                <a href="#contact" class="text-xs font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.contact_us') }}</a>
+                <a href="{{ route('about') }}" class="text-xs font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.about') }}</a>
+                <a href="{{ route('pricing') }}" class="text-xs font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.pricing') }}</a>
             </div>
 
             <!-- CTA -->
@@ -187,6 +188,7 @@
             </button>
             <a href="#features" class="mobile-nav-link text-2xl font-bold uppercase tracking-[0.2em]">{{ __('messages.features') }}</a>
             <a href="#contact" class="mobile-nav-link text-2xl font-bold uppercase tracking-[0.2em]">{{ __('messages.contact_us') }}</a>
+            <a href="{{ route('about') }}" class="mobile-nav-link text-2xl font-bold uppercase tracking-[0.2em]">{{ __('messages.about') }}</a>
             <a href="{{ route('pricing') }}" class="mobile-nav-link text-2xl font-bold uppercase tracking-[0.2em]">{{ __('messages.pricing') }}</a>
             <div class="pt-8 flex flex-col gap-4 w-full px-12">
                 @auth

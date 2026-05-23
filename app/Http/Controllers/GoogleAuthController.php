@@ -122,9 +122,9 @@ class GoogleAuthController extends Controller
 
         // Redirect to their designated dashboard
         if ($user->role === 'admin') {
-            return redirect()->intended('admin/dashboard');
+            return redirect('admin/dashboard');
         }
 
-        return redirect()->intended('staff/dashboard');
+        return redirect('staff/dashboard');
     }
 }
