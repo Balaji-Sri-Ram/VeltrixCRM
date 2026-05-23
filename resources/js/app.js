@@ -5,6 +5,9 @@ import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
+window.gsap = gsap;
+window.ScrollTrigger = ScrollTrigger;
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
@@ -38,11 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Attach click listeners to all hash links in navbar / footer (e.g. #features, #contact)
+    // Attach click listeners to all hash links in navbar / footer (e.g. #features, #contact, #)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             const targetId = anchor.getAttribute('href');
-            if (targetId === '#') return;
+            if (targetId === '#') {
+                e.preventDefault();
+                scrollToSection(0, 1.5); // scroll to top smoothly
+                return;
+            }
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();

@@ -467,17 +467,24 @@
 
     let successAnim, cancelAnim;
 
+    // Preload the success sound on page load so it plays instantly on click
+    const successSound = new Audio('/PhonePe - Ting Ding.mp3');
+    successSound.preload = 'auto';
+    successSound.load();
+
     function confirmPayment() {
+        // Play Success Sound after half a second delay
+        setTimeout(() => {
+            successSound.currentTime = 0;
+            successSound.play().catch(error => console.warn('Audio playback prevented by browser:', error));
+        }, 250);
+
         modal.classList.add('hidden');
         modal.classList.remove('flex');
 
         const overlay = document.getElementById('success-overlay');
         overlay.classList.remove('hidden');
         overlay.classList.add('flex');
-        
-        // Play Success Sound
-        const successSound = new Audio('/PhonePe - Ting Ding.mp3');
-        successSound.play().catch(error => console.warn('Audio playback prevented by browser:', error));
         
         if (successAnim) successAnim.destroy();
         successAnim = lottie.loadAnimation({

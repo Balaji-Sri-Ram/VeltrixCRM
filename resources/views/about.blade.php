@@ -285,7 +285,7 @@
                 <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
                     <!-- Left: Company Mission & Pillars -->
-                    <div class="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
+                    <div class="lg:col-span-5 space-y-8">
                         <div class="space-y-4">
                             <span
                                 class="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">{{ __('messages.about_subtitle') }}</span>
@@ -298,7 +298,7 @@
                         </div>
 
                         <!-- Core Pillars Checklist -->
-                        <div class="space-y-4 pt-4 border-t border-[var(--color-border-soft)]">
+                        <div class="space-y-8 pt-4 border-t border-[var(--color-border-soft)]">
                             <div class="flex gap-4">
                                 <div
                                     class="w-5 h-5 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center flex-shrink-0 mt-1">
@@ -471,7 +471,7 @@
         </div>
     </footer>
 
-    <script>
+    <script type="module">
         document.addEventListener('DOMContentLoaded', () => {
             // Mobile Menu Logic
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -511,37 +511,37 @@
 
             // GSAP ScrollTrigger for Timeline Blocks
             const timelineBlocks = gsap.utils.toArray('.timeline-block');
-            timelineBlocks.forEach(block => {
+            timelineBlocks.forEach((block, index) => {
                 const dot = block.querySelector('.absolute');
 
+                // Premium smooth fade-up for each timeline block
                 gsap.from(block, {
                     scrollTrigger: {
                         trigger: block,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
                     },
-                    x: -20,
+                    y: 50,
                     opacity: 0,
-                    duration: 0.8,
-                    ease: 'power2.out'
+                    duration: 1.2,
+                    ease: 'power3.out',
+                    delay: index * 0.1
                 });
 
                 if (dot) {
                     gsap.fromTo(dot,
-                        { scale: 0.5, backgroundColor: '#cbd5e1' },
+                        { scale: 0, opacity: 0 },
                         {
                             scrollTrigger: {
                                 trigger: block,
-                                start: 'top 85%',
-                                toggleActions: 'play none none none'
+                                start: 'top 90%',
+                                toggleActions: 'play none none reverse'
                             },
-                            scale: 1.3,
-                            backgroundColor: '#2D3A2D',
-                            duration: 0.5,
-                            ease: 'back.out(1.7)',
-                            onComplete: () => {
-                                gsap.to(dot, { scale: 1, duration: 0.15 });
-                            }
+                            scale: 1,
+                            opacity: 1,
+                            duration: 0.8,
+                            ease: 'elastic.out(1, 0.5)',
+                            delay: index * 0.1 + 0.2
                         }
                     );
                 }
