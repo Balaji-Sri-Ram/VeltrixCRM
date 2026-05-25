@@ -9,12 +9,11 @@ RUN npm run build
 # Stage 2: Serve application with PHP-FPM and Nginx
 FROM richarvey/nginx-php-fpm:3.1.6
 
+# Tell the image where Laravel's public folder is
+ENV WEBROOT=/var/www/html/public
+
 # Set working directory
 WORKDIR /var/www/html
-
-# Copy nginx configuration
-COPY conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
-COPY conf/nginx/nginx-site.conf /etc/nginx/sites-enabled/default.conf
 
 # Copy all application files
 COPY . .
