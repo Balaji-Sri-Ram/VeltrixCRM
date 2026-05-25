@@ -456,7 +456,7 @@
                                     <h4
                                         class="text-xs font-bold uppercase tracking-widest text-[var(--color-charcoal)] mb-1">
                                         {{ __('messages.contact_email') }}</h4>
-                                    <p class="text-sm text-muted-veltrix font-medium">veltrixcrm@gmail.com</p>
+                                    <a href="mailto:veltrixcrm@gmail.com" class="text-sm text-[var(--color-primary)] font-bold transition-all">veltrixcrm@gmail.com</a>
                                 </div>
                             </div>
                             <div class="flex items-start gap-5">
@@ -472,7 +472,7 @@
                                     <h4
                                         class="text-xs font-bold uppercase tracking-widest text-[var(--color-charcoal)] mb-1">
                                         {{ __('messages.direct_line') }}</h4>
-                                    <p class="text-sm text-muted-veltrix font-medium">+91 7207674897</p>
+                                    <a href="https://wa.me/917207674897" target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-primary)] font-bold transition-all">+91 7207674897</a>
                                 </div>
                             </div>
                         </div>
