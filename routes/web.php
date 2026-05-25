@@ -10,6 +10,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AIController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 
 // Language Switcher
 Route::get('lang/{locale}', function ($locale) {
@@ -17,6 +18,16 @@ Route::get('lang/{locale}', function ($locale) {
         session()->put('locale', $locale);
     }
     return redirect()->back();
+});
+
+// Setup Database
+Route::get('/setup-database', function () {
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return 'Migrations ran successfully! You can now use the app. Please remove this route later for security.';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
 });
 
 // Landing Page
