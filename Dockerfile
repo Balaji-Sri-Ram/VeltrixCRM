@@ -2,6 +2,8 @@
 FROM node:20-alpine AS node_builder
 WORKDIR /app
 COPY package*.json ./
+# Fix for cross-platform (Windows -> Linux) native binding errors in Vite/Rollup
+RUN rm -f package-lock.json
 RUN npm install
 COPY . .
 RUN npm run build
