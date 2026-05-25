@@ -113,7 +113,7 @@ return [
     'footer_col_1' => 'Intelligence',
     'footer_col_2' => 'Foundation',
     'about' => 'About Us',
-    'contact' => 'Contact',
+    'contact' => 'Contact Us',
     'security' => 'Security',
     'enterprise' => 'Enterprise',
     'footer_rights' => '© 2026 VeltrixCRM Technologies. Established for Excellence.',
