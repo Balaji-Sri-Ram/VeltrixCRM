@@ -20,16 +20,6 @@ Route::get('lang/{locale}', function ($locale) {
     return redirect()->back();
 });
 
-// Setup Database
-Route::get('/setup-database', function () {
-    try {
-        Artisan::call('migrate', ['--force' => true]);
-        return 'Migrations ran successfully! You can now use the app. Please remove this route later for security.';
-    } catch (\Exception $e) {
-        return 'Error: ' . $e->getMessage();
-    }
-});
-
 // Landing Page
 Route::get('/', function () {
     return view('welcome');
