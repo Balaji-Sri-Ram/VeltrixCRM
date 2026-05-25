@@ -173,7 +173,7 @@
                     class="text-xs font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.features') }}</a>
                 <a href="#contact"
                     class="text-xs font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.contact_us') }}</a>
-                <a href="#"
+                <a href="{{ route('about') }}"
                     class="text-xs font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.about') }}</a>
                 <a href="{{ route('pricing') }}"
                     class="text-xs font-bold uppercase tracking-widest text-[var(--color-graphite)] hover:text-[var(--color-primary)] transition-colors">{{ __('messages.pricing') }}</a>
@@ -250,7 +250,7 @@
                 class="mobile-nav-link text-2xl font-bold uppercase tracking-[0.2em]">{{ __('messages.features') }}</a>
             <a href="#contact"
                 class="mobile-nav-link text-2xl font-bold uppercase tracking-[0.2em]">{{ __('messages.contact_us') }}</a>
-            <a href="#"
+            <a href="{{ route('about') }}"
                 class="mobile-nav-link text-2xl font-bold uppercase tracking-[0.2em]">{{ __('messages.about') }}</a>
             <a href="{{ route('pricing') }}"
                 class="mobile-nav-link text-2xl font-bold uppercase tracking-[0.2em]">{{ __('messages.pricing') }}</a>
@@ -614,7 +614,7 @@
                     <h5 class="text-[10px] font-bold uppercase tracking-widest text-[var(--color-charcoal)] mb-8">
                         {{ __('messages.footer_col_2') }}</h5>
                     <ul class="space-y-4 text-xs font-bold text-muted-veltrix uppercase tracking-[0.15em]">
-                        <li><a href="#"
+                        <li><a href="{{ route('about') }}"
                                 class="hover:text-[var(--color-primary)] transition-colors">{{ __('messages.about') }}</a>
                         </li>
                         <li><a href="#contact"
