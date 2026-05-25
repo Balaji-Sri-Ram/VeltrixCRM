@@ -30,7 +30,7 @@ COPY --from=node_builder /app/public/build ./public/build
 RUN composer install --no-dev --optimize-autoloader
 
 # Set proper permissions for Laravel
-RUN chown -R webuser:webgroup /var/www/html
+RUN chown -R www-data:www-data /var/www/html
 
 # Switch back to the secure, unprivileged user for running the app
-USER webuser
+USER www-data
