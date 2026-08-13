@@ -91,7 +91,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('register') }}" class="space-y-6">
+                <form method="POST" action="{{ route('register') }}" class="space-y-6" id="authForm">
                     @csrf
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -166,8 +166,12 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full btn-primary-veltrix !py-5 shadow-xl shadow-[var(--color-primary)]/10 hover:-translate-y-0.5 transition-all">
-                        <span class="text-xs uppercase tracking-widest font-bold">Establish Presence</span>
+                    <button type="submit" id="submitBtn" class="w-full btn-primary-veltrix !py-5 shadow-xl shadow-[var(--color-primary)]/10 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                        <svg id="submitSpinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span id="submitText" class="text-xs uppercase tracking-widest font-bold">Establish Presence</span>
                     </button>
 
                     <!-- Divider -->
@@ -192,6 +196,23 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            const authForm = document.getElementById('authForm');
+            if (authForm) {
+                authForm.addEventListener('submit', function() {
+                    const btn = document.getElementById('submitBtn');
+                    const spinner = document.getElementById('submitSpinner');
+                    const text = document.getElementById('submitText');
+                    
+                    if (btn && spinner && text) {
+                        btn.disabled = true;
+                        btn.classList.add('opacity-75', 'cursor-not-allowed');
+                        spinner.classList.remove('hidden');
+                        text.innerText = 'Establishing Presence...';
+                    }
+                });
+            }
+
+
             // Entrance Animations
             gsap.to(".animate-in-left", { x: 0, opacity: 1, duration: 1.2, ease: "power4.out" });
             gsap.to(".animate-in-up", { y: 0, opacity: 1, duration: 1.2, delay: 0.3, ease: "power4.out" });
