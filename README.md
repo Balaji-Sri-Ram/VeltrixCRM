@@ -1,63 +1,99 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# VeltrixCRM
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![VeltrixCRM](https://img.shields.io/badge/Veltrix-CRM-4F46E5?style=for-the-badge&logo=laravel)
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Render](https://img.shields.io/badge/Render-%46E3B7?style=for-the-badge&logo=render&logoColor=white)
 
-## About Laravel
+**VeltrixCRM** is a modern, high-performance Customer Relationship Management (CRM) platform built on the robust Laravel framework. Designed with user experience in mind, it provides businesses with an elegant interface to manage customers, tasks, and workflows seamlessly.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🌟 Key Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Advanced Authentication:** Secure credential-based login alongside seamless Google OAuth integration.
+- **Role-Based Access Control (RBAC):** Distinct workspace experiences for Administrators and Staff/Managers.
+- **Interactive & Dynamic UI:** Premium user interface featuring micro-animations, glassmorphism, and instant visual feedback (powered by GSAP and Tailwind CSS).
+- **Cloud-Native Database:** Fully integrated with Neon's serverless PostgreSQL for infinite scalability and zero downtime.
+- **Activity & Task Tracking:** Built-in activity logs and task management tailored for enterprise productivity.
 
-## Learning Laravel
+## 🛠️ Technology Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Backend:** Laravel 11.x / PHP 8.2+
+- **Frontend:** Blade Templates, Tailwind CSS, GSAP (Animations)
+- **Database:** PostgreSQL (Neon Serverless)
+- **Hosting / Deployment:** Render
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🚀 Getting Started (Local Development)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+To get a local copy up and running, follow these simple steps.
 
-### Premium Partners
+### Prerequisites
+* PHP >= 8.2
+* Composer
+* PostgreSQL or MySQL
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Installation
 
-## Contributing
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Balaji-Sri-Ram/VeltrixCRM.git
+   cd VeltrixCRM
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Install Composer Dependencies**
+   ```bash
+   composer install
+   ```
 
-## Code of Conduct
+3. **Configure Environment Variables**
+   ```bash
+   cp .env.example .env
+   ```
+   *Update the `.env` file with your database credentials and Google OAuth keys.*
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. **Generate Application Key**
+   ```bash
+   php artisan key:generate
+   ```
 
-## Security Vulnerabilities
+5. **Run Migrations & Seeders**
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. **Start the Development Server**
+   ```bash
+   php artisan serve
+   ```
+   *Visit `http://localhost:8000` in your browser.*
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## ☁️ Deployment (Render & Neon)
 
-## Deployment
+VeltrixCRM is optimized for deployment on [Render](https://render.com) using [Neon PostgreSQL](https://neon.tech).
 
-Try VeltrixCRM Live Demo : https://veltrixcrm.onrender.com
+**Important Environment Variables for Production:**
+Ensure the following variables are strictly set in your production environment to bypass SNI driver limitations and ensure secure connections:
+
+```env
+DB_CONNECTION=pgsql
+DB_HOST=ep-your-neon-host.aws.neon.tech
+DB_PORT=5432
+DB_DATABASE=neondb
+DB_USERNAME=neondb_owner
+DB_PASSWORD="endpoint=ep-your-neon-endpoint;your_actual_password"
+DB_SSLMODE=require
+QUEUE_CONNECTION=sync
+```
+
+*(Note: The `endpoint=...;` prefix in the password is required for local Windows development or outdated `libpq` drivers. On modern Linux containers like Render, you may just use the raw password).*
+
+---
+
+## 🛡️ License
+
+The VeltrixCRM source code is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

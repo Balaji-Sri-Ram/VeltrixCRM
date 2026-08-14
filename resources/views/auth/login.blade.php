@@ -128,12 +128,17 @@
                         <label for="remember" class="ml-3 block text-xs font-bold text-muted-veltrix uppercase tracking-widest cursor-pointer select-none">Remember this session</label>
                     </div>
 
-                    <button type="submit" id="submitBtn" class="w-full btn-primary-veltrix !py-5 shadow-xl shadow-[var(--color-primary)]/10 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
-                        <svg id="submitSpinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span id="submitText" class="text-xs uppercase tracking-widest font-bold">Access Workspace</span>
+                    <button type="submit" id="submit-btn" class="w-full btn-primary-veltrix !py-5 shadow-xl shadow-[var(--color-primary)]/10 transition-all relative overflow-hidden group hover:-translate-y-0.5">
+                        <span id="btn-text" class="relative z-10 flex items-center justify-center transition-all duration-300 text-xs uppercase tracking-widest font-bold">
+                            Access Workspace
+                        </span>
+                        <span id="btn-loader" class="absolute inset-0 flex items-center justify-center opacity-0 -translate-y-full bg-[var(--color-primary)] z-20 text-xs uppercase tracking-widest font-bold">
+                            <svg class="animate-spin -ml-1 mr-2.5 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+                                <path class="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Authenticating...
+                        </span>
                     </button>
 
                     <!-- Divider -->
@@ -183,6 +188,32 @@
             // Initial states
             gsap.set(".animate-in-left", { x: -30 });
             gsap.set(".animate-in-up", { y: 30 });
+            
+            // Form Submit Loading Effect
+            const form = document.querySelector('form');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoader = document.getElementById('btn-loader');
+
+            if (form && submitBtn && btnText && btnLoader) {
+                form.addEventListener('submit', () => {
+                    // Prevent double clicks
+                    if(submitBtn.classList.contains('is-loading')) return;
+                    submitBtn.classList.add('is-loading');
+                    
+                    // Visually disable button
+                    submitBtn.classList.add('cursor-not-allowed');
+                    
+                    // Slide text down and fade out
+                    gsap.to(btnText, { y: 20, opacity: 0, duration: 0.3, ease: "power2.in" });
+                    
+                    // Slide loader in from top
+                    gsap.to(btnLoader, { y: 0, opacity: 1, duration: 0.4, delay: 0.15, ease: "back.out(1.2)" });
+                    
+                    // Subtle scale pulse
+                    gsap.to(submitBtn, { scale: 0.98, duration: 0.15, yoyo: true, repeat: 1 });
+                });
+            }
         });
     </script>
 </body>
