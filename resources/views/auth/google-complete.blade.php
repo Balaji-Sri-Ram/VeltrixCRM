@@ -237,8 +237,17 @@
                     </div>
 
                     <!-- Submit Action Button -->
-                    <button type="submit" class="w-full btn-primary-veltrix !py-5 shadow-xl shadow-[var(--color-primary)]/10 font-bold uppercase tracking-widest text-xs">
-                        Initialize Workspace
+                    <button type="submit" id="submit-btn" class="w-full btn-primary-veltrix !py-5 shadow-xl shadow-[var(--color-primary)]/10 font-bold uppercase tracking-widest text-xs relative overflow-hidden group">
+                        <span id="btn-text" class="relative z-10 flex items-center justify-center transition-all duration-300">
+                            Initialize Workspace
+                        </span>
+                        <span id="btn-loader" class="absolute inset-0 flex items-center justify-center opacity-0 -translate-y-full bg-[var(--color-primary)] z-20">
+                            <svg class="animate-spin -ml-1 mr-2.5 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+                                <path class="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Initializing Workspace...
+                        </span>
                     </button>
                 </form>
             </div>
@@ -252,6 +261,32 @@
             gsap.fromTo(".animate-in-left", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 1.2, ease: "power4.out" });
             gsap.fromTo(".animate-in-up", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, delay: 0.3, ease: "power4.out" });
             gsap.fromTo(".animate-in-fade", { opacity: 0 }, { opacity: 1, duration: 1, ease: "power2.out" });
+
+            // Form Submit Loading Effect
+            const form = document.querySelector('form');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoader = document.getElementById('btn-loader');
+
+            if (form && submitBtn && btnText && btnLoader) {
+                form.addEventListener('submit', () => {
+                    // Prevent double clicks
+                    if(submitBtn.classList.contains('is-loading')) return;
+                    submitBtn.classList.add('is-loading');
+                    
+                    // Visually disable button
+                    submitBtn.classList.add('cursor-not-allowed');
+                    
+                    // Slide text down and fade out
+                    gsap.to(btnText, { y: 20, opacity: 0, duration: 0.3, ease: "power2.in" });
+                    
+                    // Slide loader in from top
+                    gsap.to(btnLoader, { y: 0, opacity: 1, duration: 0.4, delay: 0.15, ease: "back.out(1.2)" });
+                    
+                    // Subtle scale pulse
+                    gsap.to(submitBtn, { scale: 0.98, duration: 0.15, yoyo: true, repeat: 1 });
+                });
+            }
         });
 
         function selectRole(roleValue, element) {

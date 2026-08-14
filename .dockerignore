@@ -1,6 +1,7 @@
 .git
 .env
 node_modules
+package-lock.json
 vendor
 tests
 storage/logs/*.log
