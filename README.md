@@ -1,10 +1,10 @@
-# 🏢 VeltrixCRM
+# VeltrixCRM
 
 **VeltrixCRM** is a modern, lightweight Customer Relationship Management (CRM) web application designed to streamline client interactions, lead management, and team workflows. Built with a focus on performance, scalability, and ease of deployment, it provides teams with an intuitive platform to track and manage customer lifecycles effectively.
 
 ---
 
-## 🚀 Purpose & Overview
+## Purpose & Overview
 
 Managing customer relationships efficiently requires structured data tracking and seamless collaboration. VeltrixCRM solves common CRM workflow bottlenecks by offering:
 * **Centralized Data Management:** Easily store, view, and organize customer information, accounts, and communication history.
@@ -13,7 +13,7 @@ Managing customer relationships efficiently requires structured data tracking an
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Backend Framework:** PHP 8.2+ / [Laravel](https://laravel.com)
 * **Frontend Asset Bundling:** [Vite](https://vitejs.dev)
@@ -23,7 +23,7 @@ Managing customer relationships efficiently requires structured data tracking an
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before running the project locally, ensure you have installed:
 * **PHP** >= 8.2
@@ -33,7 +33,7 @@ Before running the project locally, ensure you have installed:
 
 ---
 
-## ⚡ Quickstart / Local Setup
+## Quickstart / Local Setup
 
 1. **Clone the repository**
    ```bash
@@ -84,7 +84,7 @@ php artisan serve
 
 ---
 
-## ☁️ Deployment (Render & Neon)
+## Deployment (Render & Neon)
 
 VeltrixCRM includes full Docker support and is optimized for direct deployment on **[Render](https://render.com)** backed by a **[Neon PostgreSQL](https://neon.tech)** serverless database.
 
@@ -109,5 +109,3 @@ QUEUE_CONNECTION=sync
 > **Note:** The `endpoint=...;` prefix in `DB_PASSWORD` is required for specific older `libpq` drivers and local Windows development. On modern Linux containers (such as Render native builds), you can use the raw database password.
 
 Live Demo Link : https://veltrixcrm.onrender.com
-
----
