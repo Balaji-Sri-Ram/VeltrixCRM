@@ -36,12 +36,11 @@ Before running the project locally, ensure you have installed:
 ## Quickstart / Local Setup
 
 1. **Clone the repository**
-   ```bash
+```bash
    git clone [https://github.com/Balaji-Sri-Ram/VeltrixCRM.git](https://github.com/Balaji-Sri-Ram/VeltrixCRM.git)
    cd VeltrixCRM
-
 ```
-
+   
 2. **Install Backend & Frontend Dependencies**
 ```bash
 composer install
