@@ -1,4 +1,3 @@
-```markdown
 # 🏢 VeltrixCRM
 
 **VeltrixCRM** is a modern, lightweight Customer Relationship Management (CRM) web application designed to streamline client interactions, lead management, and team workflows. Built with a focus on performance, scalability, and ease of deployment, it provides teams with an intuitive platform to track and manage customer lifecycles effectively.
@@ -109,12 +108,6 @@ QUEUE_CONNECTION=sync
 
 > **Note:** The `endpoint=...;` prefix in `DB_PASSWORD` is required for specific older `libpq` drivers and local Windows development. On modern Linux containers (such as Render native builds), you can use the raw database password.
 
+Live Demo Link : https://veltrixcrm.onrender.com
+
 ---
-
-## 🛡️ License
-
-This project is open-source and licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-```
-
-```
