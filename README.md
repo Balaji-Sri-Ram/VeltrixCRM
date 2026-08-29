@@ -4,14 +4,7 @@
 
 ---
 
-## Purpose & Overview
 
-Managing customer relationships efficiently requires structured data tracking and seamless collaboration. VeltrixCRM solves common CRM workflow bottlenecks by offering:
-* **Centralized Data Management:** Easily store, view, and organize customer information, accounts, and communication history.
-* **Streamlined Authentication:** Quick and secure sign-ins using built-in Google OAuth integration alongside traditional authentication.
-* **Modern Cloud Integration:** Optimized for serverless and containerized cloud environments to scale on demand.
-
----
 
 ## Tech Stack
 
