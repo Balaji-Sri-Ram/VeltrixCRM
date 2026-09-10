@@ -1,6 +1,6 @@
 # VeltrixCRM
 
-**VeltrixCRM** is a modern, lightweight Customer Relationship Management (CRM) web application designed to streamline client interactions, lead management, and team workflows. Built with a focus on performance, scalability, and ease of deployment, it provides teams with an intuitive platform to track and manage customer lifecycles effectively.
+
 
 ---
 
