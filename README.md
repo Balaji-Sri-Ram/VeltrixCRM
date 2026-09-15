@@ -104,7 +104,3 @@ DB_SSLMODE=require
 QUEUE_CONNECTION=sync
 
 ```
-
-> **Note:** The `endpoint=...;` prefix in `DB_PASSWORD` is required for specific older `libpq` drivers and local Windows development. On modern Linux containers (such as Render native builds), you can use the raw database password.
-
-Live Demo Link : https://veltrixcrm.onrender.com
