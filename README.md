@@ -71,7 +71,12 @@ php artisan migrate:fresh --seed
 ```
 
 
+6. **Build Frontend Assets & Start the Server**
+```bash
+npm run build
+php artisan serve
 
+```
 
 
 *Visit `http://localhost:8000` in your browser.*
