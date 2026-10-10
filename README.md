@@ -23,7 +23,13 @@ Managing customer relationships efficiently requires structured data tracking an
 
 ---
 
+## Prerequisites
 
+Before running the project locally, ensure you have installed:
+* **PHP** >= 8.2
+* **Composer**
+* **Node.js & npm**
+* **PostgreSQL** or **MySQL**
 
 ---
 
