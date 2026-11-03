@@ -83,16 +83,3 @@ php artisan serve
 
 ---
 
-## Deployment (Render & Neon)
-
-VeltrixCRM includes full Docker support and is optimized for direct deployment on **[Render](https://render.com)** backed by a **[Neon PostgreSQL](https://neon.tech)** serverless database.
-
-### Production Environment Configuration
-
-Set the following environment variables in your deployment dashboard:
-
-
-
-> **Note:** The `endpoint=...;` prefix in `DB_PASSWORD` is required for specific older `libpq` drivers and local Windows development. On modern Linux containers (such as Render native builds), you can use the raw database password.
-
-Live Demo Link : https://veltrixcrm.onrender.com
